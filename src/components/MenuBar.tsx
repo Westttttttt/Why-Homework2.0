@@ -51,11 +51,11 @@ const MenuBar = () => {
                   Ask Questions
                </Link>
                <Link
-                  href={"/my_profile"}
+                  href={"/West"}
                   onClick={handleSelectMenu}
                   className={cn(
                      "flex items-center gap-2",
-                     pathname === "/my_profile" && "text-green-500"
+                     pathname === "/West" && "text-green-500"
                   )}
                >
                   <CgProfile className="text-xl" />
