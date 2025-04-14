@@ -72,3 +72,51 @@ export const questions = [
       profilePic: "https://i.pinimg.com/736x/ba/9e/a7/ba9ea7c7e179726af53bc4f0a095a2f6.jpg",
    },
 ];
+
+export const profileQuestions = [
+   {
+     profilePic: "https://i.pinimg.com/736x/83/67/8f/83678f4941b8d106136201deebb26bc7.jpg",
+     username: "West",
+     uploadedAt: "5 hours ago",
+     title: "Best way to learn DSA?",
+     tags: "coding", // Changed from "dsa" to "coding"
+     questionDescription:
+       "I've been struggling with consistency. Any good roadmaps or tips to stay on track while doing DSA practice daily?",
+     comment: 12,
+     check: 3,
+   },
+   {
+     profilePic: "https://i.pinimg.com/736x/83/67/8f/83678f4941b8d106136201deebb26bc7.jpg",
+     username: "West",
+     uploadedAt: "1 day ago",
+     title: "Need help understanding pointers in C",
+     tags: "coding",
+     questionDescription:
+       "I can’t wrap my head around how pointers work and how memory is accessed. Can someone explain in easy words or share a resource?",
+     comment: 9,
+     check: 2,
+   },
+   {
+     profilePic: "https://i.pinimg.com/736x/83/67/8f/83678f4941b8d106136201deebb26bc7.jpg",
+     username: "West",
+     uploadedAt: "2 days ago",
+     title: "Why does x^0 = 1 in math?",
+     tags: "maths",
+     questionDescription:
+       "It doesn't make sense to me why anything raised to the power 0 becomes 1. Can someone explain the logic or proof behind it?",
+     comment: 7,
+     check: 4,
+   },
+   {
+     profilePic: "https://i.pinimg.com/736x/83/67/8f/83678f4941b8d106136201deebb26bc7.jpg",
+     username: "West",
+     uploadedAt: "4 days ago",
+     title: "How to stay consistent while self-studying?",
+     tags: "others",
+     questionDescription:
+       "I lose motivation every few days and struggle to maintain momentum. Any tips or apps that worked for you guys?",
+     comment: 5,
+     check: 1,
+   },
+ ];
+ 
