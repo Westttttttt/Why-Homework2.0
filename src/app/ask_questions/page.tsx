@@ -57,7 +57,7 @@ const AskQuestions = () => {
                </SelectContent>
             </Select>
          </div>
-         {/* {selectedCategory === "coding" && <div>Code selected</div>} */}
+         {selectedCategory === "coding" && <div>Code selected</div>}
          <div
             className="flex flex-col gap-2 w-full p-6"
             onClick={() => imageRef.current?.click()}
