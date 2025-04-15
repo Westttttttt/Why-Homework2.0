@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 
 const Questions = () => {
    return (
-      <div className="w-full flex justify-center flex-col items-center gap-8 ">
-         {questions.map((question) => (
+      <section className="max-w-md flex justify-center flex-col items-center gap-4 ">
+         {questions.map((question, idx) => (
             <div
-               key={question.username}
+               key={idx}
                className="w-full p-4 flex flex-col gap-4 bg-[#1b1b1b] "
             >
                <section className="flex gap-2 items-center">
@@ -26,9 +26,9 @@ const Questions = () => {
                   <Button
                      className={cn(
                         "text-[#4CC9F0] cursor-pointer border border-[#4CC9F0] bg-[#00c2fd1c] min-w-22",
-                        question.tags === "math" &&
+                        question.tags === "maths" &&
                            "bg-[#00ff551e] text-green-500 border-green-500",
-                        question.tags === "other" &&
+                        question.tags === "others" &&
                            "bg-[#080cd51a] text-[#0671fc] border-[#0671fc]"
                      )}
                   >
@@ -52,7 +52,7 @@ const Questions = () => {
                </section>
             </div>
          ))}
-      </div>
+      </section>
    );
 };
 

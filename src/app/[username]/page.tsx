@@ -12,7 +12,7 @@ const MyProfile = async ({
    const { username } = await params;
    return (
       <section
-         className="w-full min-h-screen flex flex-col items-center py-12div px-4"
+         className="w-full min-h-screen flex flex-col items-center py-12 px-4"
          aria-labelledby="profile-heading"
       >
          <div className="w-full max-w-md flex flex-col items-center">

@@ -1,0 +1,9 @@
+
+User-agent: *
+Allow: /
+
+# Block specific paths if needed
+Disallow: /api/
+
+# Sitemap (optional but good for SEO if you generate one)
+Sitemap: https://why-homework2-0.vercel.app/

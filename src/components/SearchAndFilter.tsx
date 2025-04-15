@@ -6,7 +6,7 @@ const SearchAndFilter = () => {
    const selected = "All";
 
    return (
-      <div className="w-full h-32 bg-[#060606] flex justify-center items-center max-lg:flex-col gap-3 px-4">
+      <div className="w-full h-24 bg-[#060606] flex justify-center items-center max-lg:flex-col gap-3 px-4 fixed z-40 mt-16">
          <section className="flex gap-2 w-full items-center">
             <input
                type="text"
