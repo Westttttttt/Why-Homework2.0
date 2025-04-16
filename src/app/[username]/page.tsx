@@ -3,6 +3,12 @@ import { profileQuestions } from "@/constants/constants";
 import { cn } from "@/lib/utils";
 import { CheckCheck, MessageCircle } from "lucide-react";
 import { MdVerified } from "react-icons/md";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+   title: "Profile",
+};
+
 
 const MyProfile = async ({
    params,
@@ -95,7 +101,7 @@ const MyProfile = async ({
                         <Button className="rounded-full w-16 cursor-pointer hover:opacity-70 border border-gray-600">
                            <CheckCheck /> {question.check}
                         </Button>
-                        <Button className="bg-blue-500 rounded-full hover:bg-blue-600 cursor-pointer py-2">
+                        <Button className="bg-blue-600 rounded-full hover:bg-blue-700 cursor-pointer py-2">
                            Answer Question
                         </Button>
                      </section>

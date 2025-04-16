@@ -2,6 +2,7 @@ import { questions } from "@/constants/constants";
 import { Button } from "./ui/button";
 import { CheckCheck, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const Questions = () => {
    return (
@@ -12,10 +13,12 @@ const Questions = () => {
                className="w-full p-4 flex flex-col gap-4 bg-[#1b1b1b] "
             >
                <section className="flex gap-2 items-center">
-                  <img
+                  <Image
                      src={question.profilePic}
                      alt="profilePic"
                      className="w-14 h-14 rounded-full cursor-pointer"
+                     width={56}
+                     height={56}
                   />
                   <p className="font-medium opacity-65">{question.username}</p>
                   <p className="mb-2 font-extrabold">.</p>
@@ -46,7 +49,7 @@ const Questions = () => {
                   <Button className="rounded-full w-16 cursor-pointer hover:opacity-70 border border-gray-600">
                      <CheckCheck /> {question.check}
                   </Button>
-                  <Button className="bg-blue-500 rounded-full hover:bg-blue-600 cursor-pointer py-2">
+                  <Button className="bg-blue-600 rounded-full hover:bg-blue-700 cursor-pointer py-2 ">
                      Answer Question
                   </Button>
                </section>
