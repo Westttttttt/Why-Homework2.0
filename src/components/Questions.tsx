@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Questions = () => {
    return (
-      <section className="max-w-md flex justify-center flex-col items-center gap-4 ">
+      <section className="max-w-xl flex justify-center flex-col items-center gap-4 ">
          {questions.map((question, idx) => (
             <div
                key={idx}
