@@ -21,12 +21,6 @@ const userSchema = new Schema<IUser>({
    pin: {
       type: String,
       required: true,
-      validate: {
-         validator: function (v: string) {
-            return /^[0-9]{4}$/.test(v);
-         },
-         message: (props) => `${props.value} is not a valid 4-digit pin!`,
-      },
    },
    profilePic: {
       type: String,
@@ -59,6 +53,6 @@ userSchema.pre("save", function (next) {
    next();
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
+const User = mongoose.models.User || mongoose.model<IUser>("User", userSchema);
 
 export default User;

@@ -14,7 +14,7 @@ const answerSchema = new Schema<IAnswer>({
    question: {
       type: Types.ObjectId,
       ref: "Question",
-      required: true
+      required: true,
    },
    text: {
       type: String,
@@ -34,5 +34,6 @@ const answerSchema = new Schema<IAnswer>({
    },
 });
 
-const Answer = mongoose.model<IAnswer>("Answer", answerSchema);
+const Answer =
+   mongoose.models.Answer || mongoose.model<IAnswer>("Answer", answerSchema);
 export default Answer;
