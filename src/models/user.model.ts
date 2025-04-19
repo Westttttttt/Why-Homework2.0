@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 import { IQuestions } from "./question.model";
 import { IAnswer } from "./answer.model";
 
@@ -17,6 +17,7 @@ const userSchema = new Schema<IUser>({
       type: String,
       required: true,
       minlength: 3,
+      unique: true,
    },
    pin: {
       type: String,
