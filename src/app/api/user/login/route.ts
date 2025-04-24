@@ -4,34 +4,22 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { generateTokenAndSetCookie } from "@/lib/generateTokenAndSetCookie";
 
-type RequestBody = {
-   username: string;
-   pin: string;
-};
-
 export async function POST(request: Request) {
-   connectDb();
    try {
-      const body: RequestBody = await request.json();
-      const { username, pin } = body;
+      await connectDb();
+
+      const { username, pin } = await request.json();
 
       if (!username || !pin) {
          return NextResponse.json(
-            {
-               error: "All fields are required",
-            },
+            { error: "All fields are required" },
             { status: 400 }
          );
       }
 
-      const user = (await User.findOne({ username })) as IUser;
+      const user: IUser | null = await User.findOne({ username });
       if (!user) {
-         return NextResponse.json(
-            {
-               error: "User not Found",
-            },
-            { status: 404 }
-         );
+         return NextResponse.json({ error: "User not Found" }, { status: 404 });
       }
 
       const isPassCorrect = await bcrypt.compare(pin, user.pin);
@@ -42,23 +30,25 @@ export async function POST(request: Request) {
          );
       }
 
-      if (user && isPassCorrect) {
-         await generateTokenAndSetCookie(user._id as string);
-      }
+      // Generate token and set cookie
+      await generateTokenAndSetCookie(user._id as string);
 
+      // Return the response
       return NextResponse.json(
          {
             message: "User login Successfully",
-            user,
+            user: {
+               _id: user._id,
+               username: user.username,
+               // Add other non-sensitive fields you want to return
+            },
          },
          { status: 200 }
       );
    } catch (error) {
-      console.log("Error trying to logging");
+      console.error("Error in login:", error);
       return NextResponse.json(
-         {
-            error: "Something went wrong" + error,
-         },
+         { error: "Something went wrong" },
          { status: 500 }
       );
    }

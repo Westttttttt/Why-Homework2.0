@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Types } from "mongoose";
+import mongoose, { Document, Model, Schema, Types } from "mongoose";
 import { IQuestions } from "./question.model";
 import { IAnswer } from "./answer.model";
 
@@ -12,40 +12,45 @@ export interface IUser extends Document {
    answerGiven: Types.ObjectId[] | IAnswer[];
 }
 
-const userSchema = new Schema<IUser>({
-   username: {
-      type: String,
-      required: true,
-      minlength: 3,
-      unique: true,
-   },
-   pin: {
-      type: String,
-      required: true,
-   },
-   profilePic: {
-      type: String,
-   },
-   quote: {
-      type: String,
-   },
-   joinedAt: {
-      type: Date,
-      default: Date.now,
-   },
-   questionAsked: [
-      {
-         type: Types.ObjectId,
-         ref: "Question",
+const userSchema = new Schema<IUser>(
+   {
+      username: {
+         type: String,
+         required: true,
+         minlength: 3,
+         unique: true,
       },
-   ],
-   answerGiven: [
-      {
-         type: Types.ObjectId,
-         ref: "Answer",
+      pin: {
+         type: String,
+         required: true,
       },
-   ],
-});
+      profilePic: {
+         type: String,
+      },
+      quote: {
+         type: String,
+      },
+      joinedAt: {
+         type: Date,
+         default: Date.now,
+      },
+      questionAsked: [
+         {
+            type: Types.ObjectId,
+            ref: "Question",
+         },
+      ],
+      answerGiven: [
+         {
+            type: Types.ObjectId,
+            ref: "Answer",
+         },
+      ],
+   },
+   {
+      timestamps: true,
+   }
+);
 
 userSchema.pre("save", function (next) {
    if (!this.profilePic && this.username) {
@@ -54,6 +59,7 @@ userSchema.pre("save", function (next) {
    next();
 });
 
-const User = mongoose.models.User || mongoose.model<IUser>("User", userSchema);
+const User: Model<IUser> =
+   mongoose.models.User || mongoose.model<IUser>("User", userSchema);
 
 export default User;

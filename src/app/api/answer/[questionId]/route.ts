@@ -1,25 +1,27 @@
 import connectDb from "@/db/connectDB";
 import { getCurrentUser } from "@/lib/getCurrentUser";
+import Answer, { IAnswer } from "@/models/answer.model";
 import Question, { IQuestions } from "@/models/question.model";
 import User, { IUser } from "@/models/user.model";
 import { Types } from "mongoose";
 import { NextResponse } from "next/server";
 
-type AskQuestionRequestBody = {
-   title: string;
-   description?: string;
-   category: "coding" | "maths" | "others";
+type GiveAnswerRequestBody = {
+   text: string;
+   image?: string;
+   questionId: string | Types.ObjectId;
 };
 
 export async function POST(request: Request) {
    await connectDb();
    try {
       const userId = await getCurrentUser();
-      console.log(userId);
+      console.log("userId is ==== ", userId);
+
       if (!userId) {
          return NextResponse.json(
             {
-               error: "Unauthorized, Please login first, Before asking ",
+               error: "Unauthorized, Please login first, Before giving answer ",
             },
             { status: 401 }
          );
@@ -35,54 +37,50 @@ export async function POST(request: Request) {
          );
       }
 
-      const body: AskQuestionRequestBody = await request.json();
-      const { title, description, category } = body;
+      const body: GiveAnswerRequestBody = await request.json();
 
-      if (!title || !category) {
+      // const { questionId } = await params;
+      const { text, image, questionId } = body;
+      console.log(questionId);
+
+      const isQuestionExists = await Question.findById(questionId);
+      if (!isQuestionExists) {
          return NextResponse.json(
             {
-               error: "All fields are required",
+               error: "Question doesn't exists, check again",
+            },
+            { status: 404 }
+         );
+      }
+
+      if (!text) {
+         return NextResponse.json(
+            {
+               error: "Please Provide the required fields",
             },
             { status: 400 }
          );
       }
 
-      if (
-         category !== "coding" &&
-         category !== "maths" &&
-         category !== "others"
-      ) {
-         return NextResponse.json(
-            {
-               error: "Category should be either coding, maths or others",
-            },
-            { status: 400 }
-         );
-      }
-
-      const newQuestion: IQuestions = new Question({
-         title,
-         description,
-         category,
-         uploader: user._id as Types.ObjectId,
+      const newAnswer: IAnswer = new Answer({
+         question: questionId as Types.ObjectId,
+         text,
+         image,
+         answerBy: user._id,
       });
 
-      const savedQuestion = await newQuestion.save();
-      if (savedQuestion) {
-         await User.findByIdAndUpdate<IUser>(
-            userId,
-            {
-               $push: {
-                  questionAsked: savedQuestion._id as Types.ObjectId,
-               },
-            },
-            { new: true }
-         );
-      }
+      const postedAns = await newAnswer.save();
 
+      if (postedAns) {
+         await Question.findByIdAndUpdate<IQuestions>(questionId, {
+            $push: {
+               answer: postedAns._id as Types.ObjectId,
+            },
+         });
+      }
       return NextResponse.json(
          {
-            savedQuestion,
+            ans: postedAns,
          },
          { status: 201 }
       );
