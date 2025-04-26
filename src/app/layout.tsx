@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import Navbar from "@/components/Navbar";
 import { Poppins } from "next/font/google";
+import {Toaster} from "react-hot-toast";
 
 export const metadata: Metadata = {
    title: "Why Homework 2.0",
@@ -24,6 +25,7 @@ export default function RootLayout({
          <body className="bg-[#121212] text-white">
             <Navbar />
             <main>{children}</main>
+            <Toaster/>
          </body>
       </html>
    );
