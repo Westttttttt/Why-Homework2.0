@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { CheckCheck, MessageCircle } from "lucide-react";
 import { MdVerified } from "react-icons/md";
 import type { Metadata } from "next";
+import { getCurrentAuthenticatedUser } from "@/services/user.services";
 
 export const metadata: Metadata = {
    title: "Profile",
@@ -16,6 +17,8 @@ const MyProfile = async ({
    params: Promise<{ username: string }>;
 }) => {
    const { username } = await params;
+   const user = await getCurrentAuthenticatedUser();
+   
    return (
       <section
          className="w-full min-h-screen flex flex-col items-center py-12 px-4"
